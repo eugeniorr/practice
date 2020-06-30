@@ -1,5 +1,5 @@
-var canv = document.getElementById("mycanvas1");
-var ctx = canv.getContext('2d');
+var cnvs = document.getElementById("mycanvas1");
+var tx = cnvs.getContext("2d");
 
 var x=[
 27.429,
@@ -420,7 +420,6 @@ var x=[
 ]
 
 var y=[
-
 397.59,
 394.38,
 387.95,
@@ -838,10 +837,22 @@ var y=[
 325.3
 ]
 
-ctx.beginPath();
-ctx.moveTo(x[0],y[0]);
-for (let i=1;i<x.length;i++) {
-	ctx.lineTo(x[i],y[i]);
+/*tx.beginPath();
+tx.moveTo(x[0], y[0]);
+for (let i = 1; i < x.length; i++) {
+	tx.lineTo(x[i],y[i]);
 }
-ctx.closePath();
-ctx.stroke();
+tx.closePath();
+tx.stroke(); */
+
+async function drawTheLine() {
+	for(var i = 1; i < x.length; i++) {
+		await new Promise(resolve => setTimeout(resolve, 10));
+		tx.beginPath();
+		tx.moveTo(x[i - 1], y[i - 1]);
+		tx.lineTo(x[i], y[i]);
+		tx.closePath();
+		tx.stroke();
+	}
+}
+drawTheLine();

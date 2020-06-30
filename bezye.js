@@ -1,5 +1,5 @@
-var canv = document.getElementById("mycanvas2");
-var ctx = canv.getContext('2d');
+var cnvsb = document.getElementById("mycanvas2");
+var btx = cnvsb.getContext("2d");
 
 var x=[
 27.429,
@@ -838,10 +838,14 @@ var y=[
 325.3
 ]
 
-ctx.beginPath();
-for (let i = 1; i < x.length; i++) {
-	ctx.moveTo(x[i], y[i]);
-  ctx.bezierCurveTo(x[i + 1], y[i + 1], x[i + 2], y[i + 2], x[i + 3], y[i + 3]);
+async function drawTheLineb() {
+	for(var i = 0; i < x.length; i++) {
+		await new Promise(resolve => setTimeout(resolve, 10));
+		btx.beginPath();
+		btx.moveTo(x[i], y[i]);
+		btx.bezierCurveTo(x[i + 1], y[i + 1], x[i + 2], y[i + 2], x[i + 3], y[i + 3]);
+		btx.closePath();
+		btx.stroke();
+	}
 }
-ctx.closePath();
-ctx.stroke();
+drawTheLineb();
